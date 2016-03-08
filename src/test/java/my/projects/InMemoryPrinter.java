@@ -3,7 +3,7 @@ package my.projects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryInvoice implements Invoice {
+public class InMemoryPrinter implements Printer {
 
   private List<String> output = new ArrayList<String>();
 

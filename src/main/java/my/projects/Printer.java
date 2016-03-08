@@ -1,6 +1,6 @@
 package my.projects;
 
-public interface Invoice {
+public interface Printer {
 
   void add(String line);
 
