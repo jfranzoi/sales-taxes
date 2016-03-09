@@ -36,6 +36,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
 				<configuration>
 					<source>${maven.compiler.version}</source>
 					<target>${maven.compiler.version}</target>
@@ -44,6 +45,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.4.1</version>
 				<executions>
 					<execution>
 						<id>enforce-java</id>
