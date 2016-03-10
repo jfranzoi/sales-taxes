@@ -81,7 +81,7 @@ public class ShoppingBasketTest {
   
   @Test
   public void testSalesTaxesPartial() throws Exception {
-    InMemoryScanner scanner = new InMemoryScanner().append("1 any at 0.00").append("1 any at 0.00");
+    InMemoryScanner scanner = new InMemoryScanner().append("1 any at 1.00").append("1 any at 2.00");
     
     new ShoppingBasket( new FixedSalesTax(new Money("1")) ).process(scanner, printer);
     

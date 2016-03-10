@@ -10,11 +10,6 @@ public class BasicSalesTax implements SalesTax {
 
   @Override
   public Money priceFor(Product product) {
-
-    if (isInAny(SPECIAL_CATEGORIES, product.description())) {
-      return product.price();
-    }
-
     return product.price().sum(taxesFor(product));
   }
 
@@ -24,6 +19,10 @@ public class BasicSalesTax implements SalesTax {
 
   @Override
   public Money taxesFor(Product product) {
+    if (isInAny(SPECIAL_CATEGORIES, product.description())) {
+      return new Money("0.00");
+    }
+    
     return product.price().multiply(TEN_PERCENT);
   }
 }

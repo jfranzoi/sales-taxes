@@ -19,10 +19,15 @@ public class BasicSalesTaxTest {
     assertThat(new BasicSalesTax().priceFor(new Product("chocolate bar", "10")), is(new Money("10")));
     assertThat(new BasicSalesTax().priceFor(new Product("headache pills", "10")), is(new Money("10")));
   }
-  
+
   @Test
   public void testTaxRate() throws Exception {
     assertThat(new BasicSalesTax().taxesFor(new Product("music CD", "10")), is(new Money("1")));
+  }
+
+  @Test
+  public void testTaxRateNotApplied() throws Exception {
+    assertThat(new BasicSalesTax().taxesFor(new Product("book", "10")), is(new Money("0")));
   }
 
 }

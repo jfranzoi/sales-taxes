@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -14,7 +13,6 @@ import org.junit.rules.TemporaryFolder;
 import my.projects.salestaxes.dummies.FileContent;
 import my.projects.salestaxes.dummies.InMemoryPrinter;
 
-@Ignore("WIP")
 public class AcceptanceTest {
 
   @Rule
