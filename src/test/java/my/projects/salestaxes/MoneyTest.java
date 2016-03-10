@@ -31,13 +31,22 @@ public class MoneyTest {
   }
 
   @Test
-  public void testFormat() throws Exception {
+  public void testDescribe() throws Exception {
+    assertThat(new Money("12.3").describe(), is("12.30"));
     assertThat(new Money("12.34").describe(), is("12.34"));
+    assertThat(new Money("12.340").describe(), is("12.34"));
   }
 
   @Test
   public void testComplexCalculation() throws Exception {
-    assertThat(new Money("14.99").sum(new Money("14.99").multiply(0.10)), is(new Money("16.49")));
+    Money money = new Money("14.99");
+    assertThat(money.sum(money.multiply(0.10)), is(new Money("16.49")));
+  }
+
+  @Test
+  public void testRounding() throws Exception {
+    Money money = new Money("47.50");
+    assertThat(money.multiply(0.05).sum(money.multiply(0.10)), is(new Money("7.13")));
   }
 
   @Test

@@ -13,12 +13,7 @@ public class FixedSalesTax implements SalesTax {
   }
 
   @Override
-  public Money priceFor(Product product) {
-    return product.price().sum(taxes);
-  }
-
-  @Override
-  public Money taxesFor(Product product) {
+  public Money applyTo(Product product) {
     return taxes;
   }
 

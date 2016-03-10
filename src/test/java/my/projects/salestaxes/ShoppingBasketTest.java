@@ -6,6 +6,10 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,8 +20,8 @@ import my.projects.salestaxes.dummies.InMemoryScanner;
 @SuppressWarnings("unchecked")
 public class ShoppingBasketTest {
 
+  private List<SalesTax> noTaxes = fixedTaxes("0");
   private InMemoryPrinter printer;
-  private FixedSalesTax noTaxes = new FixedSalesTax(new Money("0"));
 
   @Before
   public void setUp() {
@@ -74,7 +78,7 @@ public class ShoppingBasketTest {
   public void testItemsWithTaxes() throws Exception {
     InMemoryScanner scanner = new InMemoryScanner().append("1 book at 10.50").append("1 music CD at 5.50");
 
-    new ShoppingBasket( new FixedSalesTax(new Money("1")) ).process(scanner, printer);
+    new ShoppingBasket( fixedTaxes("1") ).process(scanner, printer);
 
     assertThat(printer.output(), hasItems("1 book: 11.50", "1 music CD: 6.50"));
   }
@@ -83,9 +87,24 @@ public class ShoppingBasketTest {
   public void testSalesTaxesPartial() throws Exception {
     InMemoryScanner scanner = new InMemoryScanner().append("1 any at 1.00").append("1 any at 2.00");
     
-    new ShoppingBasket( new FixedSalesTax(new Money("1")) ).process(scanner, printer);
+    new ShoppingBasket( fixedTaxes("1") ).process(scanner, printer);
     
     assertThat(printer.output(), hasItem("Sales Taxes: 2.00"));
+  }
+  
+  @Test
+  public void testManyTaxes() throws Exception {
+    InMemoryScanner scanner = new InMemoryScanner().append("1 any at 1.00").append("1 any at 2.00");
+    
+    new ShoppingBasket(fixedTaxes("1", "1")).process(scanner, printer);
+    
+    assertThat(printer.output(), hasItem("Sales Taxes: 4.00"));
+  }
+
+  private List<SalesTax> fixedTaxes(String... amounts) {
+    return Arrays.asList(amounts).stream()
+                    .map(x -> new FixedSalesTax(new Money(x)))
+                    .collect(Collectors.toList());
   }
 
 }

@@ -10,7 +10,7 @@ public class Money {
   private BigDecimal amount;
 
   public Money(String string) {
-    this(precise(new BigDecimal(string)));
+    this(new BigDecimal(string));
   }
 
   private Money(BigDecimal amount) {
@@ -22,11 +22,24 @@ public class Money {
   }
 
   public Money multiply(double times) {
-    return new Money(amount.multiply(precise(new BigDecimal(times)), rounded()));
+    return new Money(amount.multiply(new BigDecimal(times), roundTo(PRECISION)));
+  }
+
+  public Money divide(double factor) {
+    return new Money(amount.divide(new BigDecimal(factor)));
+  }
+
+  public Money withoutDecimals() {
+    return new Money(amount.round(new MathContext(0)));
+  }
+
+  public Money scaleTo(double scale) {
+    double factor = 1 / scale;
+    return multiply(factor).withoutDecimals().divide(factor);
   }
 
   public String describe() {
-    return amount.toPlainString();
+    return amount.setScale(2).toPlainString();
   }
 
   @Override
@@ -37,17 +50,11 @@ public class Money {
 
   @Override
   public String toString() {
-    return new StringBuilder().append(this.getClass().getName()).append(": ").append(describe())
-        .toString();
+    return describe();
   }
 
-  private static BigDecimal precise(BigDecimal result) {
-    result.setScale(PRECISION, RoundingMode.CEILING);
-    return result;
-  }
-
-  private MathContext rounded() {
-    return new MathContext(PRECISION, RoundingMode.HALF_UP);
+  private MathContext roundTo(int precision) {
+    return new MathContext(precision, RoundingMode.HALF_UP);
   }
 
 }

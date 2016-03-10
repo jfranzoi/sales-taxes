@@ -28,21 +28,38 @@ public class AcceptanceTest {
   }
 
   @Test
-  public void testOne() throws Exception {
+  public void testTaxesOnGoodsCategories() throws Exception {
 
     new FileContent(purchase)
-      .append("1 book at 12.49")
-      .append("1 music CD at 14.99")
-      .append("1 chocolate bar at 0.85")
-      .save();
+          .append("1 book at 12.49")
+          .append("1 music CD at 14.99")
+          .append("1 chocolate bar at 0.85")
+          .save();
     
-    new ShoppingBasket(new BasicSalesTax()).process(new FileScanner(purchase), printer);
+    new ShoppingBasket().process(new FileScanner(purchase), printer);
     
     assertThat(printer.output(), contains(  "1 book: 12.49", 
                                             "1 music CD: 16.49",
                                             "1 chocolate bar: 0.85", 
                                             "Sales Taxes: 1.50", 
                                             "Total: 29.83"
+    ));
+  }
+  
+  @Test
+  public void testTaxesOnImportedGoods() throws Exception {
+
+    new FileContent(purchase)
+          .append("1 imported box of chocolates at 10.00")
+          .append("1 imported bottle of perfume at 47.50")
+          .save();
+    
+    new ShoppingBasket().process(new FileScanner(purchase), printer);
+    
+    assertThat(printer.output(), contains(  "1 imported box of chocolates: 10.50",
+                                            "1 imported bottle of perfume: 54.65",
+                                            "Sales Taxes: 7.65",
+                                            "Total: 65.15"
     ));
   }
 
