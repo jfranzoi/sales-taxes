@@ -2,6 +2,7 @@ package my.projects.salestaxes;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class ShoppingBasket {
 
@@ -32,28 +33,21 @@ public class ShoppingBasket {
   }
 
   private Money taxesIn(List<Product> items) {
-    Money result = new Money("0.00");
-    for (Product product : items) {
-      result = result.sum(taxesFor(product));
-    }
-    return result;
+    return sumUp(items, p -> taxesFor(p));
   }
 
   private Money taxesFor(Product product) {
-    Money result = new Money("0.00");
-    for (SalesTax tax : salesTaxes) {
-      result = result.sum(tax.applyTo(product));
-    }
-
-    return new SalesTaxesRounding().applyTo(result);
+    return new SalesTaxesRounding().applyTo(sumUp(salesTaxes, t -> t.applyTo(product)));
   }
 
   private Money totalIn(List<Product> items) {
-    Money result = new Money("0.00");
-    for (Product product : items) {
-      result = result.sum(priceFor(product));
-    }
-    return result;
+    return sumUp(items, p -> priceFor(p));
+  }
+
+  private <T> Money sumUp(List<T> items, Function<T, Money> mapper) {
+    return items.stream()
+              .map(mapper)
+              .reduce(new Money("0.00"), (x, y) -> x.sum(y));
   }
 
   private Money priceFor(Product product) {
