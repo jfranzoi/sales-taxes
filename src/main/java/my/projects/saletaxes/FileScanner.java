@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileScanner {
+public class FileScanner implements Scanner {
 
   private File source;
 

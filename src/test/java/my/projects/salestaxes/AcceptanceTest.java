@@ -13,6 +13,7 @@ import org.junit.rules.TemporaryFolder;
 
 import my.projects.salestaxes.dummies.FileContent;
 import my.projects.salestaxes.dummies.InMemoryPrinter;
+import my.projects.saletaxes.FileScanner;
 import my.projects.saletaxes.ShoppingBasket;
 
 @Ignore("WIP")
@@ -39,7 +40,7 @@ public class AcceptanceTest {
       .append("1 chocolate bar at 0.85")
       .save();
     
-    new ShoppingBasket().process(purchase, printer);
+    new ShoppingBasket().process( new FileScanner( purchase ), printer);
     
     assertThat(printer.output(), contains(  "1 book: 12.49", 
                                             "1 music CD: 16.49",

@@ -6,24 +6,23 @@ import java.math.RoundingMode;
 
 public class Money {
 
-  private static final MathContext PRECISION = new MathContext(2, RoundingMode.HALF_UP);
-
+  private static final int PRECISION = 4;
   private BigDecimal amount;
 
-  public Money(String amount) {
-    this(bigDecimalFor(amount));
-  }
-
-  private static BigDecimal bigDecimalFor(String amount) {
-    return new BigDecimal(amount, PRECISION);
+  public Money(String string) {
+    this(precise(new BigDecimal(string)));
   }
 
   private Money(BigDecimal amount) {
     this.amount = amount;
   }
 
+  public Money sum(Money money) {
+    return new Money(amount.add(money.amount));
+  }
+
   public Money multiply(double times) {
-    return new Money(amount.multiply(new BigDecimal(times), PRECISION));
+    return new Money(amount.multiply(precise(new BigDecimal(times)), rounded()));
   }
 
   @Override
@@ -36,6 +35,15 @@ public class Money {
   public String toString() {
     return new StringBuilder().append(this.getClass().getName()).append(": ").append(amount)
         .toString();
+  }
+
+  private static BigDecimal precise(BigDecimal result) {
+    result.setScale(PRECISION, RoundingMode.CEILING);
+    return result;
+  }
+
+  private MathContext rounded() {
+    return new MathContext(PRECISION, RoundingMode.HALF_UP);
   }
 
 }
