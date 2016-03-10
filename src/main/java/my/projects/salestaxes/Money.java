@@ -48,7 +48,7 @@ public class Money {
 
   @Override
   public String toString() {
-    return amount.toPlainString();
+    return describe();
   }
 
   private MathContext roundTo(int precision) {

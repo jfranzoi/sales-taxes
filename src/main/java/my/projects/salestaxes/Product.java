@@ -2,6 +2,8 @@ package my.projects.salestaxes;
 
 public class Product {
 
+  private static final String IMPORTED = "imported ";
+
   private String description;
   private Money price;
 
@@ -11,6 +13,9 @@ public class Product {
   }
 
   public String description() {
+    if (description.contains(IMPORTED)) {
+      return String.join("", IMPORTED, description.replace(IMPORTED, ""));
+    }
     return description;
   }
 

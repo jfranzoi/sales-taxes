@@ -69,7 +69,7 @@ public class AcceptanceTest {
           .append("1 imported bottle of perfume at 27.99")
           .append("1 bottle of perfume at 18.99")
           .append("1 packet of headache pills at 9.75")
-          .append("1 imported box of chocolates at 11.25")
+          .append("1 box of imported chocolates at 11.25")
           .save();
 
     new ShoppingBasket().process(new FileScanner(purchase), printer);
