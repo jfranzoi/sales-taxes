@@ -3,7 +3,7 @@ package my.projects.salestaxes.dummies;
 import java.util.ArrayList;
 import java.util.List;
 
-import my.projects.saletaxes.Scanner;
+import my.projects.salestaxes.Scanner;
 
 public class InMemoryScanner implements Scanner {
 

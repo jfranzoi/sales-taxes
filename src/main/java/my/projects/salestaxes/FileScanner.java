@@ -1,4 +1,4 @@
-package my.projects.saletaxes;
+package my.projects.salestaxes;
 
 import java.io.BufferedReader;
 import java.io.File;

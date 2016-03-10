@@ -1,4 +1,4 @@
-package my.projects.saletaxes;
+package my.projects.salestaxes;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItem;
@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import my.projects.salestaxes.ShoppingBasket;
 import my.projects.salestaxes.dummies.InMemoryPrinter;
 import my.projects.salestaxes.dummies.InMemoryScanner;
 

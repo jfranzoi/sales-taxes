@@ -5,8 +5,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import my.projects.saletaxes.Money;
-import my.projects.saletaxes.Product;
+import my.projects.salestaxes.Money;
+import my.projects.salestaxes.Product;
 
 public class ProductTest {
 

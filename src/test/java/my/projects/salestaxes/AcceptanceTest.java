@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import my.projects.salestaxes.FileScanner;
+import my.projects.salestaxes.ShoppingBasket;
 import my.projects.salestaxes.dummies.FileContent;
 import my.projects.salestaxes.dummies.InMemoryPrinter;
-import my.projects.saletaxes.FileScanner;
-import my.projects.saletaxes.ShoppingBasket;
 
 @Ignore("WIP")
 public class AcceptanceTest {

@@ -11,8 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import my.projects.salestaxes.FileScanner;
 import my.projects.salestaxes.dummies.FileContent;
-import my.projects.saletaxes.FileScanner;
 
 public class FileScannerTest {
 

@@ -3,7 +3,7 @@ package my.projects.salestaxes.dummies;
 import java.util.ArrayList;
 import java.util.List;
 
-import my.projects.saletaxes.Printer;
+import my.projects.salestaxes.Printer;
 
 public class InMemoryPrinter implements Printer {
 
