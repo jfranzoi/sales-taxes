@@ -21,15 +21,15 @@ public class ShoppingBasket {
     List<Product> items = new Purchase(scanner).items();
 
     for (Product product : items) {
-      printer.add(concat("1", " ", product.description(), ": ", format(priceFor(product))));
+      printer.add(concat("1", " ", product.description(), ": ", priceFor(product).describe()));
     }
 
-    printer.add(concat("Sales Taxes: ", format(taxesIn(items))));
-    printer.add(concat("Total: ", format(totalIn(items))));
+    printer.add(concat("Sales Taxes: ", taxesIn(items).describe()));
+    printer.add(concat("Total: ", totalIn(items).describe()));
   }
 
-  private String format(Money money) {
-    return money.describe();
+  private Money priceFor(Product product) {
+    return product.price().sum(taxesFor(product));
   }
 
   private Money taxesIn(List<Product> items) {
@@ -48,10 +48,6 @@ public class ShoppingBasket {
     return items.stream()
               .map(mapper)
               .reduce(new Money("0.00"), (x, y) -> x.sum(y));
-  }
-
-  private Money priceFor(Product product) {
-    return product.price().sum(taxesFor(product));
   }
 
   private String concat(String... items) {
