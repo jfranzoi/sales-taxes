@@ -62,5 +62,25 @@ public class AcceptanceTest {
                                             "Total: 65.15"
     ));
   }
+  
+  @Test
+  public void testRounding() throws Exception {
+    new FileContent(purchase)
+          .append("1 imported bottle of perfume at 27.99")
+          .append("1 bottle of perfume at 18.99")
+          .append("1 packet of headache pills at 9.75")
+          .append("1 imported box of chocolates at 11.25")
+          .save();
+
+    new ShoppingBasket().process(new FileScanner(purchase), printer);
+
+    assertThat(printer.output(), contains(  "1 imported bottle of perfume: 32.19",
+                                            "1 bottle of perfume: 20.89", 
+                                            "1 packet of headache pills: 9.75", 
+                                            "1 imported box of chocolates: 11.85", 
+                                            "Sales Taxes: 6.70",
+                                            "Total: 74.68"
+    ));
+  }
 
 }

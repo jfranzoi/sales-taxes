@@ -38,9 +38,11 @@ public class MoneyTest {
   }
 
   @Test
-  public void testComplexCalculation() throws Exception {
+  public void testComplexCalculations() throws Exception {
     Money money = new Money("14.99");
     assertThat(money.sum(money.multiply(0.10)), is(new Money("16.49")));
+    
+    assertThat( new Money("10.11").multiply(20), is(new Money("202.20")));
   }
 
   @Test

@@ -6,7 +6,9 @@ import java.math.RoundingMode;
 
 public class Money {
 
-  private static final int PRECISION = 3;
+  private static final int SCALE = 2;
+  private static final RoundingMode ROUNDING = RoundingMode.HALF_UP;
+
   private BigDecimal amount;
 
   public Money(String string) {
@@ -14,7 +16,7 @@ public class Money {
   }
 
   private Money(BigDecimal amount) {
-    this.amount = amount;
+    this.amount = amount.setScale(SCALE, ROUNDING);
   }
 
   public Money sum(Money money) {
@@ -22,24 +24,20 @@ public class Money {
   }
 
   public Money multiply(double times) {
-    return new Money(amount.multiply(new BigDecimal(times), roundTo(PRECISION)));
+    return new Money(amount.multiply(new BigDecimal(times), roundTo(SCALE * 2)));
   }
 
   public Money divide(double factor) {
     return new Money(amount.divide(new BigDecimal(factor)));
   }
 
-  public Money withoutDecimals() {
-    return new Money(amount.round(new MathContext(0)));
-  }
-
-  public Money scaleTo(double scale) {
-    double factor = 1 / scale;
-    return multiply(factor).withoutDecimals().divide(factor);
+  public Money ceil() {
+    double doubleValue = amount.doubleValue();
+    return new Money(new BigDecimal(Math.ceil(doubleValue)));
   }
 
   public String describe() {
-    return amount.setScale(2).toPlainString();
+    return amount.toPlainString();
   }
 
   @Override
@@ -50,11 +48,11 @@ public class Money {
 
   @Override
   public String toString() {
-    return describe();
+    return amount.toPlainString();
   }
 
   private MathContext roundTo(int precision) {
-    return new MathContext(precision, RoundingMode.HALF_UP);
+    return new MathContext(precision, ROUNDING);
   }
 
 }
