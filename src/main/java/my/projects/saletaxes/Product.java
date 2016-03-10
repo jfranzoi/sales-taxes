@@ -10,14 +10,18 @@ public class Product {
     this.price = new Money(price);
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    Product other = (Product) obj;
-    return description.equals(other.description) && price.equals(other.price);
+  public String description() {
+    return description;
   }
 
   public Money price() {
     return price;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    Product other = (Product) obj;
+    return description.equals(other.description) && price.equals(other.price);
   }
 
 }
