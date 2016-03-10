@@ -1,5 +1,6 @@
 package my.projects.salestaxes;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ShoppingBasket {
@@ -15,12 +16,15 @@ public class ShoppingBasket {
     List<Product> items = new Purchase(scanner).items();
 
     for (Product product : items) {
-      printer.add(new StringBuilder().append("1").append(" ").append(product.description())
-          .append(": ").append(priceFor(product).describe()).toString());
+      printer.add(concat("1", " ", product.description(), ": ", priceFor(product).describe()));
     }
 
-    printer.add(new StringBuilder().append("Sales Taxes: ").append(taxesIn(items).describe()).toString());
-    printer.add(new StringBuilder().append("Total: ").append(totalIn(items).describe()).toString());
+    printer.add(concat("Sales Taxes: ", taxesIn(items).describe()));
+    printer.add(concat("Total: ", totalIn(items).describe()));
+  }
+
+  private Money priceFor(Product product) {
+    return salesTax.priceFor(product);
   }
 
   private Money taxesIn(List<Product> items) {
@@ -31,16 +35,16 @@ public class ShoppingBasket {
     return result;
   }
 
-  private Money priceFor(Product product) {
-    return salesTax.priceFor(product);
-  }
-
   private Money totalIn(List<Product> items) {
     Money result = new Money("0.00");
     for (Product product : items) {
       result = result.sum(priceFor(product));
     }
     return result;
+  }
+
+  private String concat(String... items) {
+    return String.join("", Arrays.asList(items));
   }
 
 }
