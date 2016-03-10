@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import my.projects.salestaxes.FileScanner;
-import my.projects.salestaxes.ShoppingBasket;
 import my.projects.salestaxes.dummies.FileContent;
 import my.projects.salestaxes.dummies.InMemoryPrinter;
 
