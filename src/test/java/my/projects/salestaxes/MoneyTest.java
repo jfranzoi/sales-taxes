@@ -33,6 +33,11 @@ public class MoneyTest {
   }
 
   @Test
+  public void testFormat() throws Exception {
+    assertThat(new Money("12.34").describe(), is("12.34"));
+  }
+
+  @Test
   public void testEquality() throws Exception {
     assertThat(new Money("1.0"), is(new Money("1.0")));
     assertThat(new Money("1.00"), is(new Money("1.0")));

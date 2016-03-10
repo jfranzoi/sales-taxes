@@ -25,6 +25,10 @@ public class Money {
     return new Money(amount.multiply(precise(new BigDecimal(times)), rounded()));
   }
 
+  public String describe() {
+    return amount.toPlainString();
+  }
+
   @Override
   public boolean equals(Object obj) {
     Money other = (Money) obj;
