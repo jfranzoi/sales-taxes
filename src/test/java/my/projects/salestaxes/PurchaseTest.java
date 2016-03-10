@@ -1,9 +1,14 @@
-package my.projects;
+package my.projects.salestaxes;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import my.projects.salestaxes.dummies.InMemoryScanner;
+import my.projects.saletaxes.Product;
+import my.projects.saletaxes.Purchase;
+import my.projects.saletaxes.Scanner;
 
 public class PurchaseTest {
 

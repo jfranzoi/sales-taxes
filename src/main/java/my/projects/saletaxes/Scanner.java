@@ -1,4 +1,4 @@
-package my.projects;
+package my.projects.saletaxes;
 
 import java.util.List;
 

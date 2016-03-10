@@ -1,9 +1,11 @@
-package my.projects;
+package my.projects.salestaxes;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import my.projects.saletaxes.Money;
 
 public class MoneyTest {
 

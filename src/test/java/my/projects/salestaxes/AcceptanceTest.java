@@ -1,4 +1,4 @@
-package my.projects;
+package my.projects.salestaxes;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -10,6 +10,10 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import my.projects.salestaxes.dummies.FileContent;
+import my.projects.salestaxes.dummies.InMemoryPrinter;
+import my.projects.saletaxes.ShoppingBasket;
 
 @Ignore("WIP")
 public class AcceptanceTest {

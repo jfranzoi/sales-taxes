@@ -1,4 +1,4 @@
-package my.projects;
+package my.projects.salestaxes.dummies;
 
 import java.io.File;
 import java.io.FileWriter;
