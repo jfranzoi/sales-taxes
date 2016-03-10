@@ -6,7 +6,7 @@ public class ImportDutyTax implements SalesTax {
 
   @Override
   public Money applyTo(Product product) {
-    if (product.description().contains("imported")) {
+    if (product.imported()) {
       return product.price().multiply(FIVE_PERCENT);
     }
 

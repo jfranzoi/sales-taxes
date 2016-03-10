@@ -13,10 +13,14 @@ public class Product {
   }
 
   public String description() {
-    if (description.contains(IMPORTED)) {
+    if (imported()) {
       return String.join("", IMPORTED, description.replace(IMPORTED, ""));
     }
     return description;
+  }
+
+  public boolean imported() {
+    return description.contains(IMPORTED);
   }
 
   public Money price() {
