@@ -5,8 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import my.projects.salestaxes.Money;
-
 public class MoneyTest {
 
   @Test
@@ -35,6 +33,11 @@ public class MoneyTest {
   @Test
   public void testFormat() throws Exception {
     assertThat(new Money("12.34").describe(), is("12.34"));
+  }
+
+  @Test
+  public void testComplexCalculation() throws Exception {
+    assertThat(new Money("14.99").sum(new Money("14.99").multiply(0.10)), is(new Money("16.49")));
   }
 
   @Test

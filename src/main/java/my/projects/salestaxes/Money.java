@@ -6,7 +6,7 @@ import java.math.RoundingMode;
 
 public class Money {
 
-  private static final int PRECISION = 4;
+  private static final int PRECISION = 3;
   private BigDecimal amount;
 
   public Money(String string) {
@@ -37,7 +37,7 @@ public class Money {
 
   @Override
   public String toString() {
-    return new StringBuilder().append(this.getClass().getName()).append(": ").append(amount)
+    return new StringBuilder().append(this.getClass().getName()).append(": ").append(describe())
         .toString();
   }
 

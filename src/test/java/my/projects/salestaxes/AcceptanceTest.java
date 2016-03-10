@@ -38,7 +38,7 @@ public class AcceptanceTest {
       .append("1 chocolate bar at 0.85")
       .save();
     
-    new ShoppingBasket().process( new FileScanner( purchase ), printer);
+    new ShoppingBasket(new BasicSalesTax()).process(new FileScanner(purchase), printer);
     
     assertThat(printer.output(), contains(  "1 book: 12.49", 
                                             "1 music CD: 16.49",
